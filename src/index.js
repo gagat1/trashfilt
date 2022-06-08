@@ -70,7 +70,7 @@ app.post("/api/createUser", (req, res) =>{
 });
 
 //login
-app.get("/api/loginUser", (req, res) =>{
+app.post("/api/loginUser", (req, res) =>{
     const userEmail = req.body.user_email;
     const userPassword = req.body.user_password;
     const sqlQuery = "SELECT * FROM `user` WHERE `user_email` LIKE '" + userEmail + "' AND `user_password` LIKE '" + userPassword + "'";
@@ -236,6 +236,8 @@ app.get('/', (req, res) =>(
     res.send('Server running...')
 ));
 
-app.listen('5000', '0.0.0.0' () =>{
-    console.log('server is running in port 5000');
+app.use(express.json());
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
+    console.log('Server running..');
 });
